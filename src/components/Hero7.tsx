@@ -11,6 +11,7 @@ interface Hero7Props {
     text: string
     url: string
   }
+  onButtonClick?: () => void
   reviews?: {
     count: number
     rating?: number
@@ -28,6 +29,7 @@ const Hero7 = ({
     text: "Смотреть шаблоны",
     url: "#",
   },
+  onButtonClick,
   reviews = {
     count: 500,
     rating: 4.9,
@@ -93,8 +95,12 @@ const Hero7 = ({
             delay: 0.6,
           }}
         >
-          <Button asChild size="lg" className="mt-10">
-            <a href={button.url}>{button.text}</a>
+          <Button
+            size="lg"
+            className="mt-10"
+            onClick={onButtonClick ?? (() => { if (button.url !== "#") window.location.href = button.url })}
+          >
+            {button.text}
           </Button>
         </motion.div>
         <motion.div
